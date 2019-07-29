@@ -1,0 +1,34 @@
+#Education {
+  .institute {
+    border-bottom: 1px dotted;
+    h3 {
+      margin-bottom: -0.1em;
+    }
+  }
+
+  .education {
+    padding-left: 1em;
+    margin-top: -1em;
+
+    .title {
+      display: flex;
+      margin-bottom: -2em;
+      .studyPeriod {
+        font-size: 0.6em;
+        margin-top: 3.1em;
+        padding-left: 1em;
+      }
+      .studyDuration {
+        margin-left: 1em;
+        font-size: 0.8em;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .institution {
+    margin-bottom: 4em;
+  }
+
+
+}

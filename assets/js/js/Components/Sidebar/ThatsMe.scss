@@ -1,0 +1,50 @@
+#ThatsMe {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  > div {
+    background-image: url(../../../assets/Logo.jpg);
+    height: 10em;
+    width: 11em;
+    background-position: -9em -7em;
+    background-size: 23em;
+    background-repeat: no-repeat;
+    border-radius: 6em;
+  }
+  header {
+    h2 {
+      letter-spacing: 0.1em;
+    }
+  }
+
+  img {
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    display: block;
+  }
+
+  .email {
+    font-weight: bold;
+    margin-top: -1.5em;
+  }
+
+  .mailto {
+    color: inherit;
+    text-decoration: none;
+    letter-spacing: 0.2em;
+    border-bottom: dotted black 1px;
+  }
+}
+
+@media (max-width: 1280px) {
+  #ThatsMe {
+    > div {
+      margin: 0 auto;
+    }
+    header {
+      max-width: 15em;
+      margin: 0 auto;
+    }
+  }
+}

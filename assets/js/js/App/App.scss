@@ -1,0 +1,103 @@
+#App {
+  margin: 0 auto;
+  padding-left: 10em;
+  padding-right: 10em;
+
+  .app-loading {
+    text-align: center;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+}
+.fade-in.visible {
+  transition: opacity 1s ease-in;
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 1;
+}
+
+.fade-out.hidden {
+  transition: opacity 1s ease-out;
+  opacity: 0;
+}
+
+@media (max-width: 1680px) {
+  #App {
+    padding-left: 7vw;
+    padding-right: 7vw;
+  }
+}
+
+@media (max-width: 1440px) {
+  #App {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+@media (max-width: 1280px) {
+  #App {
+    padding-left: 3vw;
+    padding-right: 3vw;
+  }
+}
+
+@media (max-width: 768px) {
+  #App {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+#flex-grid {
+  display: flex;
+  padding-top: 2.5em;
+
+  #main {
+    flex-grow: 1;
+    width: 100%;
+    margin-left: 25em;
+    min-width: 22em;
+    > div {
+      padding: 1em 3em;
+    }
+  }
+
+  #sidebar {
+    display: block;
+    margin-right: 3em;
+    min-width: 22em;
+    width: 22em;
+    position: absolute;
+  }
+}
+
+@media (max-width: 1280px) {
+  #flex-grid {
+    display: block;
+
+    #main {
+      margin-left: 0em;
+    }
+    #sidebar {
+      margin-top: 4rem;
+      position: relative;
+      margin-right: 0%;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #flex-grid {
+    #main {
+      > div {
+        padding: 0.5em 1em;
+      }
+    }
+  }
+}

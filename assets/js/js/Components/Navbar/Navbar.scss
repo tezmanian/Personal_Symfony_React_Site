@@ -1,0 +1,120 @@
+#Navbar {
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -moz-justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  background-color: #fbfbfb;
+  border-bottom: solid 1px rgba(160, 160, 160, 0.3);
+  height: 3.5em;
+  left: 0;
+  line-height: 3.5em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+  //font-size: 1.2em;
+
+  .person {
+    letter-spacing: 0.2em;
+  }
+}
+
+ul.flex {
+  list-style-type: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* padding: 0.5em; */
+  padding-right: 0.4em;
+  padding-left: 0.4em;
+}
+
+.flexmenu {
+  width: 100%;
+  /*background-color: #fefefe;*/
+  //color: #101010;
+  line-height: 1.4em;
+}
+
+.menu {
+  display: none;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  font-weight: bold;
+  // background-color: #fbfbfb;
+  color: #fbfbfb;
+  background-color: #555555;
+  line-height: 2em;
+}
+
+.menu:first-child {
+  display: inline-flex;
+  justify-content: left;
+  /*width: 80%;*/
+  margin-left: 0;
+  margin-right: auto;
+  color: inherit;
+  line-height: inherit;
+  background-color: #fbfbfb;
+}
+
+.menu a {
+  color: inherit;
+  text-decoration: none;
+  padding: 0 0.5em;
+}
+
+.menu:nth-child(n + 2):hover {
+  background-color: #c0c0c0;
+  color: #000;
+  border-radius: 0.5em;
+}
+
+.mobile-menu {
+  position: absolute;
+  right: 1.5em;
+  top: 0;
+  width: 1.2em;
+}
+
+.menu-icon {
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: inline-flex;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-menu {
+    display: none;
+  }
+
+  ul.flex {
+    flex-direction: row;
+  }
+
+  .menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 10rem;
+    color: inherit;
+    background-color: #fbfbfb;
+    line-height: inherit;
+  }
+
+  .menu:first-child {
+    width: 80%;
+  }
+}
