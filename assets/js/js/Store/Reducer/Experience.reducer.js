@@ -1,15 +1,24 @@
 import { experienceConstants } from "../Constants";
 
-export function experiences(state = {}, action) {
+const initialState = {
+  items: [],
+  loading: false
+};
+
+export function experiences(state = initialState, action) {
   switch (action.type) {
     case experienceConstants.GETLIST_REQUEST:
       return {
         loading: true
       };
     case experienceConstants.GETLIST_SUCCESS:
-      return {
-        items: action.experiences
-      };
+      return Object.assign({}, state, {
+        items: action.experiences,
+        loading: false
+      });
+
+    case experienceConstants.GETLIST_CLEAN:
+      return initialState;
     case experienceConstants.GETLIST_FAILURE:
       return {
         error: action.error

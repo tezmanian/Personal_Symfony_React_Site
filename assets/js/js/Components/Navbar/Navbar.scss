@@ -18,16 +18,17 @@
   z-index: 10000;
   //font-size: 1.2em;
 
-  .person {
+}
+
+#Navbar .person {
     letter-spacing: 0.2em;
-  }
 }
 
 ul.flex {
   list-style-type: none;
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-end;
   /* padding: 0.5em; */
   padding-right: 0.4em;
@@ -41,7 +42,7 @@ ul.flex {
   line-height: 1.4em;
 }
 
-.menu {
+/*.menu {
   display: none;
   align-items: flex-start;
   justify-content: flex-start;
@@ -51,17 +52,17 @@ ul.flex {
   color: #fbfbfb;
   background-color: #555555;
   line-height: 2em;
-}
+}*/
 
 .menu:first-child {
   display: inline-flex;
   justify-content: left;
-  /*width: 80%;*/
+  width: 80%;
   margin-left: 0;
   margin-right: auto;
   color: inherit;
   line-height: inherit;
-  background-color: #fbfbfb;
+  background-color: #fafbfb;
 }
 
 .menu a {
@@ -81,6 +82,7 @@ ul.flex {
   right: 1.5em;
   top: 0;
   width: 1.2em;
+  display: none;
 }
 
 .menu-icon {
@@ -95,26 +97,37 @@ ul.flex {
   display: inline-flex;
 }
 
-@media screen and (min-width: 768px) {
-  .mobile-menu {
-    display: none;
-  }
+.menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 10rem;
+  font-weight: bold;
+  color: inherit;
+  background-color: #fbfbfb;
+  line-height: inherit;
+}
 
+@media screen and (max-width: 1000px) {
+  .mobile-menu {
+    display: block;
+  }
   ul.flex {
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .menu {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 10rem;
-    color: inherit;
-    background-color: #fbfbfb;
-    line-height: inherit;
+    display: none;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    color: #fbfbfb;
+    background-color: #555555;
+    line-height: 2em;
   }
 
   .menu:first-child {
-    width: 80%;
+    width: 100%;
   }
+
 }

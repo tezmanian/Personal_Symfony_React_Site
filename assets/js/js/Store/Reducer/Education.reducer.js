@@ -1,15 +1,23 @@
 import { educationConstants } from "../Constants";
 
-export function education(state = {}, action) {
+const initialState = {
+  items: [],
+  loading: false
+};
+
+export function education(state = initialState, action) {
   switch (action.type) {
     case educationConstants.GETLIST_REQUEST:
       return {
         loading: true
       };
     case educationConstants.GETLIST_SUCCESS:
-      return {
-        items: action.educations
-      };
+      return Object.assign({}, state, {
+        items: action.educations,
+        loading: false
+      });
+    case educationConstants.GETLIST_CLEAN:
+      return initialState;
     case educationConstants.GETLIST_FAILURE:
       return {
         error: action.error

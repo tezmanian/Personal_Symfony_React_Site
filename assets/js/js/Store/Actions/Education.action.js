@@ -2,7 +2,8 @@ import { educationConstants } from "../Constants";
 import { educationService } from "../Services";
 
 export const educationsActions = {
-  getEducationList
+  getEducationList,
+  cleanList
 };
 
 function getEducationList() {
@@ -26,4 +27,8 @@ function getEducationList() {
   function failure(error) {
     return { type: educationConstants.GETLIST_FAILURE, error };
   }
+}
+
+function cleanList() {
+    return { type: educationConstants.GETLIST_CLEAN };
 }

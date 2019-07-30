@@ -131,10 +131,9 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { alert, authentication } = state;
+  const { authentication } = state;
   const { loggedIn } = authentication;
   return {
-    alert,
     loggedIn
   };
 }

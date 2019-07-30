@@ -3,7 +3,8 @@ import { experienceService } from "../Services";
 import { history } from "../../Helpers";
 
 export const experienceActions = {
-  getJobExperienceList
+  getJobExperienceList,
+  cleanList
 };
 
 function getJobExperienceList() {
@@ -27,4 +28,8 @@ function getJobExperienceList() {
   function failure(error) {
     return { type: experienceConstants.GETLIST_FAILURE, error };
   }
+}
+
+function cleanList() {
+    return { type: experienceConstants.GETLIST_CLEAN };
 }

@@ -55,11 +55,11 @@ class Navbar extends React.Component {
               .filter(l => l.path !== "/")
               .map(l =>
                 (l.private && this.props.loggedIn) || l.private !== true ? (
-                  <li key={l.label} className="menu">
-                    <Link key={l.label} to={l.path}>
-                      {l.label}
-                    </Link>
-                  </li>
+                <li key={l.label} className="menu">
+                  <Link key={l.label} to={l.path}>
+                    {l.label}
+                  </Link>
+                </li>
                 ) : (
                   ""
                 )
