@@ -90,12 +90,6 @@ ul.flex {
   font-weight: bold;
   cursor: pointer;
 }
-.hide {
-  display: none;
-}
-.show {
-  display: inline-flex;
-}
 
 .menu {
   display: inline-flex;
@@ -130,4 +124,11 @@ ul.flex {
     width: 100%;
   }
 
+}
+
+.hide {
+  display: none;
+}
+.show {
+  display: inline-flex;
 }
