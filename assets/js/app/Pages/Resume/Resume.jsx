@@ -30,15 +30,15 @@ class Resume extends React.Component {
         <article>
           <div id="Resume">
             <div
-              className={`fade-out ${!experiences.loading &&
-                !education.loading &&
+              className={`fade-out ${ !(experiences.items.length < 1 &&
+                education.items.length < 1) &&
                 "hidden"}`}
             >
               <em>Loading information...</em>
             </div>
             <div
-              className={`fade-in ${!experiences.loading &&
-                !education.loading &&
+              className={`fade-in ${!(experiences.items.length < 1 &&
+                education.items.length < 1) &&
                 "visible"}`}
             >
               <Tabs>

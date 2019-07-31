@@ -8,9 +8,9 @@ const initialState = {
 export function education(state = initialState, action) {
   switch (action.type) {
     case educationConstants.GETLIST_REQUEST:
-      return {
+      return Object.assign({}, state, {
         loading: true
-      };
+      });
     case educationConstants.GETLIST_SUCCESS:
       return Object.assign({}, state, {
         items: action.educations,

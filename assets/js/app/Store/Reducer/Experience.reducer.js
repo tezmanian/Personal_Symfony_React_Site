@@ -8,9 +8,9 @@ const initialState = {
 export function experiences(state = initialState, action) {
   switch (action.type) {
     case experienceConstants.GETLIST_REQUEST:
-      return {
+      return Object.assign({}, state, {
         loading: true
-      };
+      });
     case experienceConstants.GETLIST_SUCCESS:
       return Object.assign({}, state, {
         items: action.experiences,
