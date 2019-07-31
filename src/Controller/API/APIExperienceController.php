@@ -31,8 +31,11 @@ class APIExperienceController extends AbstractController
     public function apiJobExperienceList(JobExperienceRepository $jobExperienceRepository): JsonResponse
     {
 
-        $data = $jobExperienceRepository->findBy([], ['id' => 'DESC']);
+        //$data = $jobExperienceRepository->findBy([], ['id' => 'DESC']);
         //$data = $jobExperienceRepository->findAll();
+        
+        $data = $jobExperienceRepository->findSortByDateOfRole();
+        
 
         $encoder = new JsonEncoder();
         // $defaultContext = [

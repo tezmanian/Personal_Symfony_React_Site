@@ -18,16 +18,17 @@ class JobExperienceRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, JobExperience::class);
     }
-
-    public function findSortByDate()
+    
+    public function findSortByDateOfRole()
     {
-        return $this->createQueryBuilder('j')
-            ->setParameter('val', $value)
-            ->orderBy('j.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+      
+        $qb = $this->createQueryBuilder('j')
+           ->leftJoin('\App\Entity\JobExperienceRole', 'r', 'WITH', 'r.jobExperience = j.id')
+           ->addorderBy('r.startDate','DESC')
+           ->addorderBy('r.endDate','DESC')
+            ;
+        
+        return $qb->getQuery()->getResult();
     }
     
     // /**
