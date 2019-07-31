@@ -4,20 +4,6 @@ import { connect } from "react-redux";
 
 const PrivateRoute = ({ authentication, component: Component, ...rest }) => (
   <div>
-    {console.log(authentication)}
-    {/* <Route
-      {...rest}
-      render={props =>
-        localStorage.getItem("user") ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        )
-      }
-    /> */}
-
     <Route
       {...rest}
       render={props =>
