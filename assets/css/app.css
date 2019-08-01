@@ -17,12 +17,11 @@
 
 @media (max-width: 1000px) {
   body {
-    font-size: 10pt;
   }
 }
 
 @media (max-width: 768px) {
   body {
-    font-size: 8pt;
+    font-size: 10pt;
   }
 }

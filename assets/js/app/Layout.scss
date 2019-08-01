@@ -74,35 +74,21 @@ textarea {
 @media (max-width: 1680px) {
   body {
     font-size: 14pt;
-
-    // #App {
-    //   padding-left: 7vw;
-    //   padding-right: 7vw;
-    // }
   }
 }
 
 @media (max-width: 1440px) {
   body {
-    // #App {
-    //   padding-left: 5vw;
-    //   padding-right: 5vw;
-    // }
   }
 }
 
 @media (max-width: 1280px) {
   body {
     font-size: 12pt;
-
-    // #App {
-    //   padding-left: 3vw;
-    //   padding-right: 3vw;
-    // }
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
   body {
     font-size: 10pt;
   }

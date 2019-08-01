@@ -12,23 +12,22 @@
   height: 3.5em;
   left: 0;
   line-height: 3.5em;
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%;
   z-index: 10000;
-  //font-size: 1.2em;
+  font-size: 1.2em;
 
-}
-
-#Navbar .person {
+  .person {
     letter-spacing: 0.2em;
+  }
 }
 
 ul.flex {
   list-style-type: none;
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-end;
   /* padding: 0.5em; */
   padding-right: 0.4em;
@@ -42,7 +41,7 @@ ul.flex {
   line-height: 1.4em;
 }
 
-/*.menu {
+.menu {
   display: none;
   align-items: flex-start;
   justify-content: flex-start;
@@ -52,17 +51,17 @@ ul.flex {
   color: #fbfbfb;
   background-color: #555555;
   line-height: 2em;
-}*/
+}
 
 .menu:first-child {
   display: inline-flex;
   justify-content: left;
-  width: 80%;
+  /*width: 80%;*/
   margin-left: 0;
   margin-right: auto;
   color: inherit;
   line-height: inherit;
-  background-color: #fafbfb;
+  background-color: #fbfbfb;
 }
 
 .menu a {
@@ -82,7 +81,6 @@ ul.flex {
   right: 1.5em;
   top: 0;
   width: 1.2em;
-  display: none;
 }
 
 .menu-icon {
@@ -90,46 +88,38 @@ ul.flex {
   font-weight: bold;
   cursor: pointer;
 }
-
-.menu {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 10rem;
-  font-weight: bold;
-  color: inherit;
-  background-color: #fbfbfb;
-  line-height: inherit;
-}
-
-@media screen and (max-width: 1000px) {
-  .mobile-menu {
-    display: block;
-  }
-  ul.flex {
-    font-size: 1.3em;
-    flex-direction: column;
-  }
-
-  .menu {
-    display: none;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    color: #fbfbfb;
-    background-color: #555555;
-    line-height: 2em;
-  }
-
-  .menu:first-child {
-    width: 100%;
-  }
-
-}
-
 .hide {
   display: none;
 }
 .show {
   display: inline-flex;
+}
+
+@media screen and (min-width: 768px) {
+    #Navbar {
+        position: fixed;
+        font-size: 1em;
+    }
+    
+  .mobile-menu {
+    display: none;
+  }
+
+  ul.flex {
+    flex-direction: row;
+  }
+
+  .menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 10rem;
+    color: inherit;
+    background-color: #fbfbfb;
+    line-height: inherit;
+  }
+
+  .menu:first-child {
+    width: 80%;
+  }
 }
