@@ -10,7 +10,6 @@ class Education extends React.Component {
     this.state = {};
   }
   render() {
-    console.log(this.props.studies.items);
     return (
       <div id="Education" className="Education">
         {/*         <div>
