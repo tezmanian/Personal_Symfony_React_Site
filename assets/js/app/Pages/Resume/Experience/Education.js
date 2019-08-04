@@ -4,19 +4,35 @@ import "moment-timezone";
 import "moment/locale/de";
 import "./Education.scss";
 
+import { connect } from "react-redux";
+import { educationsActions } from "../../../Store/Actions";
+
 class Education extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  
+  componentDidMount() {
+    this.props.dispatch(educationsActions.getEducationList());
+  }
+  
   render() {
+      const { education } = this.props;
     return (
       <div id="Education" className="Education">
-        {/*         <div>
-          <h3>Ausbildung</h3>
-        </div> */}
+            <div
+              className={`fade-out ${ !(education.items.length < 1) &&
+                "hidden"}`}
+            >
+              <em>Loading information...</em>
+            </div>
+            <div
+              className={`fade-in ${!(education.items.length < 1) &&
+                "visible"}`}
+        >
         <div className="studies">
-          {this.props.studies.items.map(function(study, i) {
+          {education.items.map(function(study, i) {
             const institute = "institute_" + i;
             const startDate = new Date(study.startDate);
             const endDate = study.endDate
@@ -60,9 +76,18 @@ class Education extends React.Component {
             );
           })}
         </div>
+        </div>
       </div>
     );
   }
 }
 
-export { Education };
+function mapStateToProps(state) {
+  const { education } = state;
+  return {
+    education
+  };
+}
+
+const connectedEducation = connect(mapStateToProps)(Education);
+export { connectedEducation as Education };

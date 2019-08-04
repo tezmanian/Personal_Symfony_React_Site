@@ -5,17 +5,37 @@ import "moment-timezone";
 import "moment/locale/de";
 import "./JobExperience.scss";
 
+import { connect } from "react-redux";
+import { experienceActions } from "../../../Store/Actions";
+
 Moment.globalLocale = "de";
 class JobExperience extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  
+  componentDidMount() {
+    this.props.dispatch(experienceActions.getJobExperienceList());
+  }
+  
   render() {
+      const { experiences } = this.props;
+      
     return (
       <div id="JobExperiences" className="jobExperiences">
-        {this.props.experiences.items &&
-          this.props.experiences.items.map(function(experience, i) {
+            <div
+              className={`fade-out ${ !(experiences.items.length < 1) &&
+                "hidden"}`}
+            >
+              <em>Loading information...</em>
+            </div>
+            <div
+              className={`fade-in ${!(experiences.items.length < 1) &&
+                "visible"}`}
+        >
+        {experiences.items &&
+          experiences.items.map(function(experience, i) {
             return (
               <section key={i} className="company">
                 <header className="companyName">
@@ -76,8 +96,17 @@ class JobExperience extends React.Component {
             );
           })}
       </div>
+              </div>
     );
   }
 }
 
-export { JobExperience };
+function mapStateToProps(state) {
+  const { experiences } = state;
+  return {
+    experiences
+  };
+}
+
+const connectedJobExperience = connect(mapStateToProps)(JobExperience);
+export { connectedJobExperience as JobExperience };

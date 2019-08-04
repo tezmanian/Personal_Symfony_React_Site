@@ -7,17 +7,10 @@ import Helmet from "react-helmet";
 
 import "./Resume.scss";
 
-import { experienceActions, educationsActions } from "../../Store/Actions";
-
 class Resume extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-
-  componentDidMount() {
-    this.props.dispatch(experienceActions.getJobExperienceList());
-    this.props.dispatch(educationsActions.getEducationList());
   }
 
   render() {
@@ -28,41 +21,28 @@ class Resume extends React.Component {
         <Helmet title="Lebenslauf" />
 
         <article>
-          <div id="Resume">
-            <div
-              className={`fade-out ${ !(experiences.items.length < 1 &&
-                education.items.length < 1) &&
-                "hidden"}`}
-            >
-              <em>Loading information...</em>
-            </div>
-            <div
-              className={`fade-in ${!(experiences.items.length < 1 &&
-                education.items.length < 1) &&
-                "visible"}`}
-            >
+          <div id="Resume">           
               <Tabs>
                 <TabList>
-                  <Tab disabled={experiences.loading ? true : false}>
+                  <Tab >
                     Berufserfahrung
                   </Tab>
-                  <Tab disabled={education.loading ? true : false}>
+                  <Tab > 
                     Ausbildung
                   </Tab>
                 </TabList>
                 <TabPanel>
-                  <JobExperience experiences={experiences} />
+                  <JobExperience />
                 </TabPanel>
                 <TabPanel>
                   <div>
-                    <Education studies={education} />
+                    <Education />
                     {/*   <Certifications
                   certifications={this.props.profile.resume.certifications}
                 /> */}
                   </div>
                 </TabPanel>
               </Tabs>
-            </div>
           </div>
         </article>
       </main>
