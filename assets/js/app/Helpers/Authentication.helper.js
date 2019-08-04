@@ -1,22 +1,30 @@
+import React from "react";
 import { educationsActions, experienceActions } from "../Store/Actions";
 import {store} from "../Store";
+import { Redirect } from "react-router-dom";
 
 export const authenticationHelper = {
   login,
   logout
 };
 
-function logout(reload) {
+/**
+ * 
+ * @returns void
+ */
+function logout() {
 
   store.dispatch(educationsActions.cleanList());
   store.dispatch(experienceActions.cleanList());
-  // remove user from local storage to log user out
+
   localStorage.removeItem("user");
-//  if (reload === true) {
-//    location.reload(true);
-//  }
 }
 
+/**
+ * 
+ * @param Object user
+ * @returns void
+ */
 function login(user) {
   // remove user from local storage to log user out
   localStorage.setItem("user", JSON.stringify(user));

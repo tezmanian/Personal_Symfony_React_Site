@@ -12,6 +12,6 @@ function getEducationList() {
   };
 
   return fetch("/api/education", requestOptions).then(
-    responseHelper.handleStandardResponse
+    responseHelper.handleAuthenticatedResponse
   );
 }

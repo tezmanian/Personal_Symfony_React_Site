@@ -12,6 +12,6 @@ function getJobExperienceList() {
   };
 
   return fetch("/api/job/experience", requestOptions).then(
-    responseHelper.handleStandardResponse
+    responseHelper.handleAuthenticatedResponse
   );
 }
