@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { history } from "../Helpers";
 import { alertActions, userActions } from "../Store/Actions";
-import { PrivateRoute, Navbar, Sidebar } from "../Components";
+import { PrivateRoute, Navbar, Sidebar, Alert } from "../Components";
 import { HomePage, LoginPage, Resume, AboutMe } from "../Pages";
 
 import "./App.scss";
@@ -74,6 +74,9 @@ class App extends React.Component {
             <title>René Halberstadt</title>
             <meta name="description" content="Helmet application" />
           </Helmet>
+          { alert &&
+          <Alert />
+          }
           <Router history={history}>
             <Navbar menuEntry={this.routes} />
 
@@ -131,10 +134,11 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { authentication } = state;
+  const { authentication, alert } = state;
   const { loggedIn } = authentication;
   return {
-    loggedIn
+    loggedIn,
+    alert
   };
 }
 
