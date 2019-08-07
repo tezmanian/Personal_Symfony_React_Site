@@ -17,18 +17,28 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class APIEducationController extends AbstractController
 {
+    
+    private $entityManager;
+
+    public function __construct(ObjectManager $objectManager)
+    {
+        $this->entityManager = $objectManager;
+    }
+    
     /**
      * @Route("/api/education", name="apiEducationList", format="json", methods={"GET"})
      * @IsGranted("ROLE_USER");
      */
-    public function apiEducationList(EducationRepository $educationRepository): JsonResponse
+    public function apiEducationList(): JsonResponse
     {
 
-        //$data = $educationRepository->findBy([], ['id' => 'DESC']);
-        $data = $educationRepository->findAll();
+        $educationRepository = $this->entityManager->getRepository(Education::class);
+        $data = $educationRepository->findBy([], ['endDate' => 'DESC','startDate' => 'DESC']);
+        //$data = $educationRepository->findAll();
         
         $encoder = new JsonEncoder();
         // $defaultContext = [

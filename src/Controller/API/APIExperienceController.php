@@ -18,21 +18,30 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 
 class APIExperienceController extends AbstractController
 {
 
+    private $entityManager;
+
+    public function __construct(ObjectManager $objectManager)
+    {
+        $this->entityManager = $objectManager;
+    }
+
+    
     /**
      * Lists all experiences including roles
      * @Route("/api/job/experience", name="apiJobExperienceList", format="json", methods={"GET"})
      * @IsGranted("ROLE_USER");
      * @return JsonResponse
      */
-    public function apiJobExperienceList(JobExperienceRepository $jobExperienceRepository): JsonResponse
+    public function apiJobExperienceList(): JsonResponse
     {
 
-        //$data = $jobExperienceRepository->findBy([], ['id' => 'DESC']);
-        //$data = $jobExperienceRepository->findAll();
+        $jobExperienceRepository = $this->entityManager->getRepository(JobExperience::class);
         
         $data = $jobExperienceRepository->findSortByDateOfRole();
         
@@ -55,7 +64,7 @@ class APIExperienceController extends AbstractController
 //            'enable_max_depth' => true,
             'groups' => ['job', 'jobRole'],
         ]);
-
+        
         return new JsonResponse($json, 200, [], true);
 
         //return $this->json($jobExperienceRepository->findAll());
