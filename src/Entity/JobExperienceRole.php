@@ -3,8 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\{Serializer\Annotation\Groups, Serializer\Annotation\MaxDepth};
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\JobExperienceRoleRepository")

@@ -3,8 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\{Security\Core\User\UserInterface, Validator\Constraints as Assert};
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")

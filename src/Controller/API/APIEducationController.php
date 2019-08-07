@@ -3,21 +3,23 @@
 namespace App\Controller\API;
 
 use App\Entity\Education;
-use App\Repository\EducationRepository;
+use DateTime;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
-// use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\{
+    Encoder\JsonEncoder,
+    Mapping\Factory\ClassMetadataFactory,
+    Mapping\Loader\AnnotationLoader,
+    Normalizer\DateTimeNormalizer,
+    Normalizer\ObjectNormalizer,
+    Serializer
+};
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\{Annotations\AnnotationReader, Persistence\ObjectManager};
 
 class APIEducationController extends AbstractController
 {
@@ -30,6 +32,7 @@ class APIEducationController extends AbstractController
     }
     
     /**
+     *
      * @Route("/api/education", name="apiEducationList", format="json", methods={"GET"})
      * @IsGranted("ROLE_USER");
      */
@@ -63,14 +66,15 @@ class APIEducationController extends AbstractController
 
         //return $this->json($jobExperienceRepository->findAll());
     }
-    
+
     /**
      * Adds new education
-     * 
+     *
      * @Route("/api/education/new", name="apiEducationNew", format="json", methods={"POST"})
      * @IsGranted("ROLE_ADMIN");
      * @param Request $request
      * @return JsonResponse
+     * @throws Exception
      */
     public function apiEducationNew(Request $request): JsonResponse
     {
@@ -78,9 +82,9 @@ class APIEducationController extends AbstractController
         $url = $request->request->get('url');
         $title = $request->request->get('title');
         $startDate = $request->request->get('startDate');
-        $startDate = ($startDate) ? new \DateTime($startDate) : new \DateTime();
+        $startDate = ($startDate) ? new DateTime($startDate) : new DateTime();
         $endDate = $request->request->get('endDate');
-        $endDate = ($endDate) ?? new \DateTime($endDate);
+        $endDate = ($endDate) ?? new DateTime($endDate);
         
         
         $entityManager = $this->getDoctrine()->getManager();

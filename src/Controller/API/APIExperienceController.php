@@ -4,22 +4,27 @@ namespace App\Controller\API;
 
 use App\Entity\JobExperience;
 use App\Entity\JobExperienceRole;
-use App\Repository\JobExperienceRepository;
-use Doctrine\Common\Annotations\AnnotationReader;
+use DateTime;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+use Symfony\Component\Serializer\{
+    Encoder\JsonEncoder,
+    Mapping\Factory\ClassMetadataFactory,
+    Mapping\Loader\AnnotationLoader,
+    Normalizer\DateTimeNormalizer,
+    Normalizer\ObjectNormalizer,
+    Serializer
+};
 // use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Common\{
+    Annotations\AnnotationException,
+    Annotations\AnnotationReader,
+    Persistence\ObjectManager
+};
 
 class APIExperienceController extends AbstractController
 {
@@ -31,12 +36,14 @@ class APIExperienceController extends AbstractController
         $this->entityManager = $objectManager;
     }
 
-    
+
     /**
      * Lists all experiences including roles
+     *
      * @Route("/api/job/experience", name="apiJobExperienceList", format="json", methods={"GET"})
      * @IsGranted("ROLE_USER");
      * @return JsonResponse
+     * @throws AnnotationException
      */
     public function apiJobExperienceList(): JsonResponse
     {
@@ -124,7 +131,10 @@ class APIExperienceController extends AbstractController
      * Adds new role to experience
      * @Route("/api/job/experience/{id}/role/new", name="apiJobRoleNew", format="json", methods={"POST"})
      * @IsGranted("ROLE_ADMIN");
+     * @param Request $request
+     * @param JobExperience $experience
      * @return JsonResponse
+     * @throws Exception
      */
     public function apiJobRoleNew(Request $request, JobExperience $experience): JsonResponse
     {
@@ -135,9 +145,9 @@ class APIExperienceController extends AbstractController
         $description = $request->request->get('description');
         $location = $request->request->get('location');
         $startDate = $request->request->get('startDate');
-        $startDate = ($startDate) ? new \DateTime($startDate) : new \DateTime();
+        $startDate = ($startDate) ? new DateTime($startDate) : new DateTime();
         $endDate = $request->request->get('endDate');
-        $endDate = ($endDate) ?? new \DateTime($endDate);
+        $endDate = ($endDate) ?? new DateTime($endDate);
         
         $jobRole = new JobExperienceRole();
         $jobRole->setTitle($title);
@@ -154,12 +164,15 @@ class APIExperienceController extends AbstractController
         return $this->json(sprintf('JobExperienceRole %s successfully created', $jobRole->getTitle()));
 
     }
-    
+
     /**
      * Adds new roles zo experience
      * @Route("/api/job/experience/{id}/roles/new", name="apiJobRolesNew", format="json", methods={"POST"})
      * @IsGranted("ROLE_ADMIN");
+     * @param Request $request
+     * @param JobExperience $experience
      * @return JsonResponse
+     * @throws Exception
      */
     public function apiJobRolesNew(Request $request, JobExperience $experience): JsonResponse
     {
@@ -176,8 +189,8 @@ class APIExperienceController extends AbstractController
             $jobRole->setTitle($role['title']);
             $jobRole->setDescription($role['description']);
             $jobRole->setLocation($role['location']);
-            $jobRole->setStartDate(($role['startDate']) ? new \DateTime($role['startDate']) : new \DateTime());
-            $jobRole->setEndDate(($role['endDate']) ?? new \DateTime($role['endDate']));
+            $jobRole->setStartDate(($role['startDate']) ? new DateTime($role['startDate']) : new DateTime());
+            $jobRole->setEndDate(($role['endDate']) ?? new DateTime($role['endDate']));
             $em->persist($jobRole);            
             $experience->addRole($jobRole);
           }
@@ -185,6 +198,6 @@ class APIExperienceController extends AbstractController
         $em->flush();
         }
         
-        return $this->json(sprintf('JobExperienceRoles successfully created for job', $experience->getCompany()));
+        return $this->json(sprintf('JobExperienceRoles successfully created for job %s', $experience->getCompany()));
     }
 }
