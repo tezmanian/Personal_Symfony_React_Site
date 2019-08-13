@@ -10,18 +10,8 @@ use Symfony\Component\{HttpFoundation\JsonResponse,
     Routing\Annotation\Route,
     Security\Core\Encoder\UserPasswordEncoderInterface};
 
-class APIUserController extends AbstractController
+class UserController extends AbstractController
 {
-//    /**
-//     * @Route("/api/user", name="apiUserList")
-//     */
-//    public function index()
-//    {
-//        return $this->render('user/index.html.twig', [
-//            'controller_name' => 'UserController',
-//        ]);
-//    }
-
 
     /**
      * @Route("/api/user/register", name="apiUserRegister", format="json")

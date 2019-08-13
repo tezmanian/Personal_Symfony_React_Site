@@ -5,20 +5,18 @@ namespace App\Controller\API;
 use App\Entity\About;
 use App\Entity\AboutItem;
 use Doctrine\Common\Annotations\AnnotationException;
-use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
-class AboutController extends AbstractController
+
+/**
+ * Class AboutController
+ * @package App\Controller\API
+ * @Route("/api/about")
+ */
+class AboutController extends AbstractApiController
 {
 
 
@@ -31,8 +29,9 @@ class AboutController extends AbstractController
 
     /**
      *
-     * @Route("/api/about", name="apiAboutList", format="json", methods={"GET"})
+     * @Route("/", name="apiAboutList", format="json", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_ANONYMOUSLY");
+     * @throws AnnotationException
      */
     public function apiAboutList(): JsonResponse
     {
@@ -40,25 +39,13 @@ class AboutController extends AbstractController
         $educationRepository = $this->entityManager->getRepository(About::class);
         $data = $educationRepository->findBy([], ['year' => 'DESC']);
 
-        $encoder = new JsonEncoder();
-
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-
-        $normalizer = new ObjectNormalizer($classMetadataFactory);
-
-        $serializer = new Serializer(array(new DateTimeNormalizer(), $normalizer), array($encoder));
-
-        $json = $serializer->serialize($data, 'json', [
-            'groups' => ['about'],
-        ]);
+        $json = $this->encodeJson($data, ['groups' => ['about']]);
 
         return new JsonResponse($json, 200, [], true);
-
-        //return $this->json($jobExperienceRepository->findAll());
     }
 
     /**
-     * @Route("/api/about/item/{id}/show", name="apiAboutShow", requirements={"id"="\d+"}, format="json", methods={"GET"})
+     * @Route("/item/{id}/show", name="apiAboutShow", requirements={"id"="\d+"}, format="json", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_ANONYMOUSLY");
      * @return JsonResponse
      * @throws AnnotationException
@@ -68,17 +55,7 @@ class AboutController extends AbstractController
         $aboutRepository = $this->entityManager->getRepository(AboutItem::class);
         $data = $aboutRepository->findOneByOffset($id);
 
-        $encoder = new JsonEncoder();
-
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-
-        $normalizer = new ObjectNormalizer($classMetadataFactory);
-
-        $serializer = new Serializer(array(new DateTimeNormalizer(), $normalizer), array($encoder));
-
-        $json = $serializer->serialize($data, 'json', [
-            'groups' => ['aboutItem'],
-        ]);
+        $json = $this->encodeJson($data, ['groups' => ['aboutItem']]);
 
         return new JsonResponse($json, 200, [], true);
     }

@@ -5,16 +5,16 @@ namespace App\Tests\Controller\API;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Description of APIUserControllerTest
+ * Description of UserControllerTest
  *
  * @author halberstadt
  */
-class APIUserControllerTest extends WebTestCase
+class UserControllerTest extends WebTestCase
 {
     
     public function testRegisterUser()
     {
-        $client = APIAuthenticationClientTest::getAuthenticatedClient();
+        $client = AuthenticationClientTest::getAuthenticatedClient();
         $client->request(
                 'POST',
                 '/api/user/register',
@@ -35,7 +35,7 @@ class APIUserControllerTest extends WebTestCase
     
     public function testGetUser()
     {
-        $client = APIAuthenticationClientTest::getAuthenticatedClient();
+        $client = AuthenticationClientTest::getAuthenticatedClient();
         $client->request('GET', '/api/user/get');
         $this->assertResponseIsSuccessful();
         $content = $client->getResponse()->getContent();

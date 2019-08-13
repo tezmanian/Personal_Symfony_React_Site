@@ -32,12 +32,12 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.2",
+        "phpmd/phpmd": "@stable",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "^1.0",
         "symfony/test-pack": "*",
-        "symfony/web-server-bundle": "4.3.*",
-        "phpmd/phpmd" : "@stable"
+        "symfony/web-server-bundle": "4.3.*"
     },
     "config": {
         "preferred-install": {

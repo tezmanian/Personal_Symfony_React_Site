@@ -2,13 +2,12 @@
 
 namespace App\Tests\Controller\API;
 
-use App\Entity\Education;
+use App\Controller\API\AboutController;
 use App\Entity\About;
 use App\Entity\AboutItem;
 use App\Repository\AboutRepository;
-use App\Controller\API\AboutController;
+use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AboutControllerTest extends WebTestCase
@@ -22,7 +21,7 @@ class AboutControllerTest extends WebTestCase
         $about->setDescription('Hier könnte ein Text stehen');
 
         $aboutItem = new AboutItem();
-        $aboutItem->setYear(new \DateTime("1999-01-01"));
+        $aboutItem->setYear(new DateTime("1999-01-01"));
         $aboutItem->setHeader('an header');
         $aboutItem->setContent('some content');
 
@@ -57,7 +56,7 @@ class AboutControllerTest extends WebTestCase
     public function testApiAboutGetItem()
     {
         $client = static::createClient();
-        //$client = APIAuthenticationClientTest::getAuthenticatedClient();
+        //$client = AuthenticationClientTest::getAuthenticatedClient();
         $client->request('GET', '/api/about/item/1/show');
         $this->assertResponseIsSuccessful();
 
@@ -69,7 +68,7 @@ class AboutControllerTest extends WebTestCase
     public function testApiAboutGetItemNull()
     {
         $client = static::createClient();
-        //$client = APIAuthenticationClientTest::getAuthenticatedClient();
+        //$client = AuthenticationClientTest::getAuthenticatedClient();
         $client->request('GET', '/api/about/item/10/show');
  
 
