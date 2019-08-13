@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCog } from '@fortawesome/free-solid-svg-icons'
+
 import "./Navbar.scss";
 
 class Navbar extends React.Component {
@@ -37,6 +40,7 @@ class Navbar extends React.Component {
   componentDidMount() {}
 
   render() {
+    const { loggedIn } = this.props;
     return (
       <header id="Navbar">
         <nav className="flexmenu">
@@ -54,8 +58,8 @@ class Navbar extends React.Component {
             {this.props.menuEntry
               .filter(l => l.path !== "/")
               .map(l =>
-                (l.private && this.props.loggedIn) || l.private !== true ? (
-                <li key={l.label} className="menu">
+                (l.private && loggedIn) || l.private !== true ? (
+                <li key={l.label} className={"menu " + l.className}>
                   <Link key={l.label} to={l.path}>
                     {l.label}
                   </Link>
@@ -64,12 +68,6 @@ class Navbar extends React.Component {
                   ""
                 )
               )}
-            <li key="Logoutin" className="menu">
-              <Link key="Logoutin" to="/login">
-                {this.props.loggedIn ? "Logout" : "Login"}
-              </Link>
-            </li>
-
             <li className="mobile-menu">
               <span
                 className="menu-icon open"

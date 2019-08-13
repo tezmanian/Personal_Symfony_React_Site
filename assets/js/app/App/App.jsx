@@ -7,6 +7,7 @@ import { history } from "../Helpers";
 import { alertActions, userActions } from "../Store/Actions";
 import { PrivateRoute, Navbar, Sidebar, Alert } from "../Components";
 import { HomePage, LoginPage, Resume, AboutMe } from "../Pages";
+import { Routes } from '../Components/Routing/Routes';
 
 import "./App.scss";
 
@@ -14,45 +15,56 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      routes: [],
+      updateRoutes: false
+    };
     const { dispatch } = this.props;
     history.listen((location, action) => {
       // clear alert on location change
       dispatch(alertActions.clear());
     });
 
-    if (this.props.loggedIn === true) {
-      dispatch(userActions.getUser());
-    }
+//    if (this.props.loggedIn === true) {
+//      dispatch(userActions.getUser());
+//    }
+    
+    this.routes = [];
+    
 
-    this.routes = [
-      {
-        path: "/",
-        exact: true,
-        sidebar: () => <Sidebar />,
-        main: () => <HomePage />,
-        label: "Rene Halberstadt"
-      },
-      {
-        path: "/about",
-        exact: true,
-        sidebar: () => <Sidebar />,
-        main: () => <AboutMe />,
-        label: "Über mich"
-      },
-      {
-        path: "/resume",
-        exact: true,
-        sidebar: () => <Sidebar />,
-        //main: "Resume/index",
-        main: () => <Resume />,
-        private: true,
-        label: "Lebenslauf"
-      }
-    ];
+  }
+
+
+
+  componentDidMount() {
+    
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  componentDidUpdate(prevProps) {
+  
+    const {loggedIn} = this.props;
+    
+  }
+
+  tick() {
+//    this.setState({
+//      //date: new Date()
+//    });
   }
 
   checkLoggedIn() {
-    if (this.props.loggedIn) {
+    const {loggedIn} = this.props;
+  
+  
+    if (loggedIn) {
       //setInterval(function() {
       //dispatch(alertActions.clear());
       //alert("Hello");
@@ -60,13 +72,10 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.checkLoggedIn();
-  }
 
   render() {
     const { alert, loggedIn } = this.props;
-
+    const routes = Routes({loggedIn})
     return (
       <div>
         <div id="App">
@@ -78,7 +87,7 @@ class App extends React.Component {
           <Alert />
           }
           <Router history={history}>
-            <Navbar menuEntry={this.routes} />
+            <Navbar menuEntry={routes} />
 
             <div id="flex-grid">
               {/** route for main div */}
@@ -86,9 +95,8 @@ class App extends React.Component {
                 <div>
                   <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
-                      {/* <PrivateRoute exact path="/" component={HomePage} /> */}
                       <Route path="/login" component={LoginPage} />
-                      {this.routes.map(route =>
+                      {routes.map(route =>
                         route.private ? (
                           <PrivateRoute
                             key={route.path}
@@ -113,8 +121,8 @@ class App extends React.Component {
               <aside id="sidebar">
                 <Suspense fallback={<div>Loading...</div>}>
                   <Switch>
-                    <Route path="/login" component={Sidebar} />
-                    {this.routes.map(route => (
+                  <Route path="/login" component={Sidebar} />
+                    {routes.map(route => (
                       <Route
                         key={route.path}
                         path={route.path}

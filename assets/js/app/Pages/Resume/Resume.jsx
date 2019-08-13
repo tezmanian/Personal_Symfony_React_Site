@@ -11,6 +11,7 @@ class Resume extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    console.log(props)
   }
 
   render() {
@@ -50,11 +51,13 @@ class Resume extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+  console.log(ownProps)
   const { experiences, education } = state;
   return {
     experiences,
-    education
+    education,
+    ownProps
   };
 }
 

@@ -1,7 +1,6 @@
-import { Route, Switch } from "react-router-dom";
 import React, { Suspense } from "react";
-import AsyncPage from "./AsyncPage";
-import PrivateRoute from "./PrivateRoute";
+import { Route, Redirect, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 function NoMatch({ location }) {
   return (
@@ -13,44 +12,39 @@ function NoMatch({ location }) {
   );
 }
 
-function RouteWithSubRoutes({ routes, profile }) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Switch>
-        {routes.map((route, i) =>
-          route.private ? (
-            <PrivateRoute
-              exact={route.exact}
-              path={route.path}
-              component={
-                <AsyncPage
-                  page={route.main}
-                  {...props}
-                  profile={profile}
-                  routes={route.routes}
-                />
-              }
-            />
-          ) : (
-            <Route
-              key={i}
-              path={route.path}
-              exact={route.exact}
-              render={props => (
-                <AsyncPage
-                  page={route.main}
-                  {...props}
-                  profile={profile}
-                  routes={route.routes}
-                />
-              )}
-            />
-          )
-        )}
-        <Route component={NoMatch} />
-      </Switch>
-    </Suspense>
+function RouteWithSubRoutes( { authentication, ...route } ) {
+  console.log(route)
+  return route.private ? (
+    <Route
+      path={route.path}
+      exact={route.exact}
+      render={props =>
+        authentication.loggedIn ? (
+          <route.main routes={route.routes} />
+        ) : (
+          <Redirect
+            to={{ pathname: "/login", state: { from: props.location } }}
+          />
+        )
+      }
+    />
+  ) : (
+    <Route
+      path={route.path}
+      exact={route.exact}
+      render={props => <route.main {...props} routes={route.routes} />}
+    />
   );
 }
 
-export default RouteWithSubRoutes;
+function mapStateToProps(state) {
+  const { authentication } = state;
+  return {
+    authentication
+  };
+}
+
+const connectedRouteWithSubRoutes = connect(mapStateToProps)(
+  RouteWithSubRoutes
+);
+export { connectedRouteWithSubRoutes as RouteWithSubRoutes };

@@ -96,11 +96,11 @@ ul.flex {
 }
 
 @media screen and (min-width: 768px) {
-    #Navbar {
-        position: fixed;
-        font-size: 1em;
-    }
-    
+  #Navbar {
+    position: fixed;
+    font-size: 1em;
+  }
+
   .mobile-menu {
     display: none;
   }
@@ -117,6 +117,12 @@ ul.flex {
     color: inherit;
     background-color: #fbfbfb;
     line-height: inherit;
+    padding-top: 0.1em;
+  }
+
+  .menu.settings {
+    width: 2em;
+    margin-right: 1em;
   }
 
   .menu:first-child {
