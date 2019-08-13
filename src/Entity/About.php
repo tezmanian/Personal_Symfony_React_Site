@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -31,15 +33,14 @@ class About
     private $description;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
-     * @Groups({"about"})
+     * @ORM\OneToMany(targetEntity="App\Entity\AboutItem", mappedBy="about", orphanRemoval=true)
      */
-    private $year;
+    private $items;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $top;
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,26 +71,33 @@ class About
         return $this;
     }
 
-    public function getYear(): ?\DateTimeInterface
+    /**
+     * @return Collection|AboutItem[]
+     */
+    public function getItems(): Collection
     {
-        return $this->year;
+        return $this->items;
     }
 
-    public function setYear(?\DateTimeInterface $year): self
+    public function addItem(AboutItem $item): self
     {
-        $this->year = $year;
+        if (!$this->items->contains($item)) {
+            $this->items[] = $item;
+            $item->setAbout($this);
+        }
 
         return $this;
     }
 
-    public function getTop(): ?bool
+    public function removeItem(AboutItem $item): self
     {
-        return $this->top;
-    }
-
-    public function setTop(?bool $top): self
-    {
-        $this->top = $top;
+        if ($this->items->contains($item)) {
+            $this->items->removeElement($item);
+            // set the owning side to null (unless already changed)
+            if ($item->getAbout() === $this) {
+                $item->setAbout(null);
+            }
+        }
 
         return $this;
     }

@@ -41,12 +41,10 @@ class AboutRepository extends ServiceEntityRepository
      * @param bool $top
      * @return mixed
      */
-    public function findOneByOffset(int $offset, bool $top)
+    public function findOneByOffset(int $offset)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.top = :top')
-            ->setParameter('top', $top)
-            ->orderBy('a.year', 'ASC')
+            //->orderBy('a.year', 'ASC')
             ->setFirstResult($offset)
             ->setMaxResults(1)
             ->getQuery()

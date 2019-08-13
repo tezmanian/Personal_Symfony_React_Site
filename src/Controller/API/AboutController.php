@@ -3,6 +3,7 @@
 namespace App\Controller\API;
 
 use App\Entity\About;
+use App\Entity\AboutItem;
 use Doctrine\Common\Annotations\AnnotationException;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -57,15 +58,15 @@ class AboutController extends AbstractController
     }
 
     /**
-     * @Route("/api/about/{id}/show", name="apiAboutShow", requirements={"id"="\d+"}, format="json", methods={"GET"})
+     * @Route("/api/about/item/{id}/show", name="apiAboutShow", requirements={"id"="\d+"}, format="json", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_ANONYMOUSLY");
      * @return JsonResponse
      * @throws AnnotationException
      */
     public function apiAboutGetItem(int $id): JsonResponse
     {
-        $aboutRepository = $this->entityManager->getRepository(About::class);
-        $data = $aboutRepository->findOneByOffset($id, false);
+        $aboutRepository = $this->entityManager->getRepository(AboutItem::class);
+        $data = $aboutRepository->findOneByOffset($id);
 
         $encoder = new JsonEncoder();
 
@@ -76,7 +77,7 @@ class AboutController extends AbstractController
         $serializer = new Serializer(array(new DateTimeNormalizer(), $normalizer), array($encoder));
 
         $json = $serializer->serialize($data, 'json', [
-            'groups' => ['about'],
+            'groups' => ['aboutItem'],
         ]);
 
         return new JsonResponse($json, 200, [], true);
