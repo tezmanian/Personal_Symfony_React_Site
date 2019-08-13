@@ -14,7 +14,7 @@ class AboutFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
         $about = new About();
-        $about->setYear( new \DateTime("1989-01-01")));
+        $about->setYear( new \DateTime("1989-01-01"));
         $about->setHeading('About me and so');
         $about->setDescription('Some things about me');
         $about->setTop(true);
