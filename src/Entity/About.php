@@ -34,6 +34,7 @@ class About
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\AboutItem", mappedBy="about", orphanRemoval=true)
+     * @Groups({"about"})
      */
     private $items;
 

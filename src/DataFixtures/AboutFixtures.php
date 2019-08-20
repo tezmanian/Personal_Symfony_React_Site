@@ -15,9 +15,12 @@ class AboutFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
         $about = new About();
-        $about->setHeading('About me and so');
-        $about->setDescription('Some things about me');
+        $about->setHeading('Neugierig auf mehr?');
+        $about->setDescription('## Über mich
+		Willkommen auf meiner Webseite');
 
+
+        
         for ($i=0;$i<10;$i++){
             $aboutItem = new AboutItem();
             try {

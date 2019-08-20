@@ -22,14 +22,16 @@ class Education extends React.Component {
     return (
       <div id="Education" className="Education">
             <div
-              className={`fade-out ${ !(education.items.length < 1) &&
-                "hidden"}`}
+              className={classNames('fade-out', {
+                'hidden': !(education.items.length < 1)
+                })}
             >
               <em>Loading information...</em>
             </div>
             <div
-              className={`fade-in ${!(education.items.length < 1) &&
-                "visible"}`}
+              className={classNames('fade-in', {
+                'visible': !(education.items.length < 1)
+                })}
         >
         <div className="studies">
           {education.items.map(function(study, i) {

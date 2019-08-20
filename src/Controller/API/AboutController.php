@@ -37,9 +37,9 @@ class AboutController extends AbstractApiController
     {
 
         $educationRepository = $this->entityManager->getRepository(About::class);
-        $data = $educationRepository->findBy([], ['year' => 'DESC']);
+        $data = $educationRepository->findOneBy([],[]);
 
-        $json = $this->encodeJson($data, ['groups' => ['about']]);
+        $json = $this->encodeJson($data, ['groups' => ['about','aboutItem']]);
 
         return new JsonResponse($json, 200, [], true);
     }

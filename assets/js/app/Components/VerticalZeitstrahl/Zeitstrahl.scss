@@ -1,0 +1,83 @@
+.zeitstrahl * {
+  box-sizing: border-box;
+}
+
+.zeitstrahl {
+  margin: 2em auto;
+  position: relative;
+  padding: 2em 0;
+
+}
+
+.zeitstrahl::after {
+  /* clearfix */
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.zeitstrahl::before {
+  /* this is the vertical line */
+  content: '';
+  position: absolute;
+/*  top: 0;*/
+  left: 1.4em;
+  height: 100%;
+  width: 4px;
+  background: #555555;
+}
+
+
+@media only screen and (min-width: 1170px) {
+  div.lineend {
+    position: relative;
+    bottom: 0;
+    margin-bottom: -4rem;
+    margin-left: 0.8rem;
+
+    .arrow {
+      border: 0.7rem solid #444;
+      line-height:0;
+      height:0;
+      padding:0;
+      margin:0;
+    }
+    .arrow.down {
+      border-right-color:  transparent;
+      border-bottom-color: transparent;
+      border-left-color:   transparent;
+    }
+  }
+}
+
+.zeitstrahl-element.end {
+  margin-bottom: -1.8em;
+
+  span {
+    position: absolute;
+    left: 0;
+    bottom: -2.2em;
+    border: 2px solid;
+    border-radius: inherit;
+    height: 0;
+    width: 3em;
+    box-shadow: none;
+    background: #f1f1f1;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+}
+
+    .arrow {
+      border: 0.7rem solid #444;
+      line-height:0;
+      height:0;
+      padding:0;
+      margin:0;
+    }
+    .arrow.down {
+      border-right-color:  transparent;
+      border-bottom-color: transparent;
+      border-left-color:   transparent;
+    }

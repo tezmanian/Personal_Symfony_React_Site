@@ -19,7 +19,3 @@ export function MarkDown(markdown) {
     />
   );
 }
-
-export const authenticationHelper = {
-  MarkDown
-};

@@ -6,7 +6,7 @@ import Helmet from "react-helmet";
 import { history } from "../Helpers";
 import { alertActions, userActions } from "../Store/Actions";
 import { PrivateRoute, Navbar, Sidebar, Alert } from "../Components";
-import { HomePage, LoginPage, Resume, AboutMe } from "../Pages";
+import { HomePage, LoginPage, Resume, AboutMe, AboutMeNew } from "../Pages";
 
 import "./App.scss";
 
@@ -36,7 +36,7 @@ class App extends React.Component {
         path: "/about",
         exact: true,
         sidebar: () => <Sidebar />,
-        main: () => <AboutMe />,
+        main: () => <AboutMeNew />,
         label: "Über mich"
       },
       {
