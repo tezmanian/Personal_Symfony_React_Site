@@ -16,32 +16,6 @@ and open the template in the editor.
     min-height: 1px;
   }
 
-  :after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
-  :first-child {
-    margin-top: 0;
-  }
-
-  :last-child {
-    margin-bottom: 0;
-  }
-  .zeitstrahl-element-ico111n {
-    background: #f1f1f1;
-    color: #555555;
-    height: 70px;
-    width: 70px;
-    background-color: #bbb;
-    border-radius: 50%;
-    border: 2px solid #555555;
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-  }
-
   .zeitstrahl-element-icon {
     position: absolute;
     top: 0;
@@ -49,7 +23,7 @@ and open the template in the editor.
     width: 3em;
     height: 3em;
     border-radius: 50%;
-    box-shadow: 0 0 0 4px #d1d1d1, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 0 2px #d1d1d1, inset 0 2px 0 rgba(0, 0, 0, 0.25), 0 2px 0 2px rgba(0, 0, 0, 0.25);
     background: #f1f1f1;
     display: table-cell;
     vertical-align: middle;
@@ -63,7 +37,7 @@ and open the template in the editor.
       left: 50%;
       top: 50%;
       margin-left: -1.5em;
-      margin-top: -0.9em;
+      margin-top: -0.8em;
     }
   }
 
@@ -89,7 +63,7 @@ and open the template in the editor.
   margin-top: -6em;
 }
 
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 1280px) {
   .zeitstrahl-element {
     margin: 4em 0;
   }

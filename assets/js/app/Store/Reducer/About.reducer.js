@@ -1,7 +1,7 @@
-import { aboutConstants } from "../Constants";
+import {aboutConstants} from "../Constants";
 
 const initialState = {
-  content: {},
+  content: null,
   loading: false
 };
 

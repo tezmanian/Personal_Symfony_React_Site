@@ -4,20 +4,20 @@ import "moment-timezone";
 import "moment/locale/de";
 import "./Education.scss";
 
-import { connect } from "react-redux";
-import { educationsActions } from "../../../Store/Actions";
+import {connect} from "react-redux";
+import {educationsActions} from "../../../Store/Actions";
 
 class Education extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  
+
   componentDidMount() {
     this.props.dispatch(educationsActions.getEducationList());
   }
-  
-  render() {
+
+    render() {
       const { education } = this.props;
     return (
       <div id="Education" className="Education">
@@ -32,7 +32,7 @@ class Education extends React.Component {
               className={classNames('fade-in', {
                 'visible': !(education.items.length < 1)
                 })}
-        >
+            >
         <div className="studies">
           {education.items.map(function(study, i) {
             const institute = "institute_" + i;

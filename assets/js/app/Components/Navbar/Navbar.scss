@@ -73,7 +73,7 @@ ul.flex {
 .menu:nth-child(n + 2):hover {
   background-color: #c0c0c0;
   color: #000;
-  border-radius: 0.5em;
+  border-radius: none;
 }
 
 .mobile-menu {
@@ -100,7 +100,7 @@ ul.flex {
         position: fixed;
         font-size: 1em;
     }
-    
+
   .mobile-menu {
     display: none;
   }
@@ -121,5 +121,11 @@ ul.flex {
 
   .menu:first-child {
     width: 80%;
+  }
+
+  .menu:nth-child(n + 2):hover {
+    background-color: #c0c0c0;
+    color: #000;
+    border-radius: 0.5em;
   }
 }

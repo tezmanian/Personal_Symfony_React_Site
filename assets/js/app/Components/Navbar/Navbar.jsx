@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import MaterialIcon from 'material-icons-react';
 
 import "./Navbar.scss";
 
@@ -19,6 +20,13 @@ class Navbar extends React.Component {
     });
     this.displayMenu();
   }
+
+    menuHidden() {
+        this.setState({
+            isHidden: true
+        });
+        this.displayMenu();
+    }
 
   displayMenu() {
     var items = document.getElementsByClassName("menu");
@@ -45,7 +53,7 @@ class Navbar extends React.Component {
               {this.props.menuEntry
                 .filter(l => l.path === "/")
                 .map(l => (
-                  <Link className="person" key={l.label} to={l.path}>
+                    <Link className="person" key={l.label} to={l.path} onClick={this.menuHidden.bind(this)}>
                     {l.label}
                   </Link>
                 ))}
@@ -56,7 +64,7 @@ class Navbar extends React.Component {
               .map(l =>
                 (l.private && this.props.loggedIn) || l.private !== true ? (
                 <li key={l.label} className="menu">
-                  <Link key={l.label} to={l.path}>
+                    <Link key={l.label} to={l.path} onClick={this.menuHidden.bind(this)}>
                     {l.label}
                   </Link>
                 </li>
@@ -65,7 +73,7 @@ class Navbar extends React.Component {
                 )
               )}
             <li key="Logoutin" className="menu">
-              <Link key="Logoutin" to="/login">
+                <Link key="Logoutin" to="/login" onClick={this.menuHidden.bind(this)}>
                 {this.props.loggedIn ? "Logout" : "Login"}
               </Link>
             </li>
@@ -76,14 +84,14 @@ class Navbar extends React.Component {
                 onClick={this.toggleHidden.bind(this)}
                 style={{ display: this.state.isHidden ? "block" : "none" }}
               >
-                &#x2261;
+                <MaterialIcon icon="menu"/>
               </span>
               <span
                 className="menu-icon close"
                 onClick={this.toggleHidden.bind(this)}
                 style={{ display: !this.state.isHidden ? "block" : "none" }}
               >
-                &#x2715;
+                <MaterialIcon icon="cancel"/>
               </span>
             </li>
           </ul>
