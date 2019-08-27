@@ -6,6 +6,7 @@ import { alert } from "./Alert.reducer";
 import { experiences } from "./Experience.reducer";
 import { education } from "./Education.reducer";
 import { about } from "./About.reducer";
+import { service } from "./Service.reducer";
 
 const rootReducer = combineReducers({
   authentication,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   alert,
   experiences,
   education,
-  about
+  about,
+  service
 });
 
 export default rootReducer;

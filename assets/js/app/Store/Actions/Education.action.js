@@ -1,5 +1,6 @@
 import { educationConstants } from "../Constants";
 import { educationService } from "../Services";
+import { serviceActions, alertActions } from "./index";
 
 export const educationsActions = {
   getEducationList,
@@ -8,13 +9,21 @@ export const educationsActions = {
 
 function getEducationList() {
   return dispatch => {
+    dispatch(serviceActions.serviceRequestLoading());
     dispatch(request());
 
     educationService
       .getEducationList()
       .then(
-        educations => dispatch(success(educations)),
-        error => dispatch(failure(error))
+        educations => {
+          dispatch(success(educations));
+          dispatch(serviceActions.serviceRequestNotLoading());
+      },
+        error => {
+          dispatch(failure(error));
+          dispatch(serviceActions.serviceRequestNotLoading());
+          dispatch(alertActions.error(error));
+        }
       );
   };
 

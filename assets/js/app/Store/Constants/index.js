@@ -4,3 +4,4 @@ export * from "./Experience.constants";
 export * from "./Education.constants";
 export * from "./User.constants";
 export * from "./About.constants";
+export * from "./Service.constants";

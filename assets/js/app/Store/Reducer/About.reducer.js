@@ -20,7 +20,6 @@ export function about(state = initialState, action) {
       return initialState;
     case aboutConstants.GETLIST_FAILURE:
       return Object.assign({}, state, {
-        content: action.about,
         loading: false,
         error: action.error
       });

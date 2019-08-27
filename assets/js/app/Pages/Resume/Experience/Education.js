@@ -3,6 +3,7 @@ import Moment from "react-moment";
 import "moment-timezone";
 import "moment/locale/de";
 import "./Education.scss";
+import classNames from 'classnames';
 
 import {connect} from "react-redux";
 import {educationsActions} from "../../../Store/Actions";
@@ -21,13 +22,6 @@ class Education extends React.Component {
       const { education } = this.props;
     return (
       <div id="Education" className="Education">
-            <div
-              className={classNames('fade-out', {
-                'hidden': !(education.items.length < 1)
-                })}
-            >
-              <em>Loading information...</em>
-            </div>
             <div
               className={classNames('fade-in', {
                 'visible': !(education.items.length < 1)

@@ -22,13 +22,15 @@ class Alert extends React.Component {
   
   render() {
     const { alert } = this.props;
-
     return (
       <div id="alert-container" className={alert.type}>
         <div className="close">
           <FontAwesomeIcon icon={faWindowClose} onClick={this.clearAlert}/> 
         </div>
-        { alert.message &&
+        { (alert.message && alert.message.message) && 
+          <div className={"message " + alert.type}>{alert.message.message}</div>
+        }
+        { (alert.message && !alert.message.message) &&
         <div className={"message " + alert.type}>{alert.message}</div>
         }
       </div>

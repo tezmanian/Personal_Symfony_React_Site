@@ -1,5 +1,6 @@
 import { aboutConstants } from "../Constants";
 import { aboutService } from "../Services";
+import { serviceActions, alertActions } from "./index";
 
 export const aboutActions = {
   getAboutList,
@@ -8,14 +9,23 @@ export const aboutActions = {
 
 function getAboutList() {
   return dispatch => {
+    dispatch(serviceActions.serviceRequestLoading());
     dispatch(request());
 
     aboutService
       .getAboutList()
       .then(
-        about => dispatch(success(about)),
-        error => dispatch(failure(error))
+        about => {
+          dispatch(success(about));
+          dispatch(serviceActions.serviceRequestNotLoading());
+        },
+        error => {
+          dispatch(failure(error));
+          dispatch(serviceActions.serviceRequestNotLoading());
+          dispatch(alertActions.error(error));
+        }
       );
+            
   };
 
   function request() {
@@ -26,9 +36,9 @@ function getAboutList() {
   }
   function failure(error) {
     return { type: aboutConstants.GETLIST_FAILURE, error };
-  }
+  }  
 }
 
-function cleanList() {
+  function cleanList() {
     return { type: aboutConstants.GETLIST_CLEAN };
-}
+  }

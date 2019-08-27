@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Router, Route, Link, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-
+import classNames from 'classnames';
 import Helmet from "react-helmet";
 import { history } from "../Helpers";
 import { alertActions, userActions } from "../Store/Actions";
@@ -65,8 +65,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { alert, loggedIn } = this.props;
-
+    const { alert, loggedIn, service } = this.props;
     return (
       <div>
         <div id="App">
@@ -83,6 +82,9 @@ class App extends React.Component {
             <div id="flex-grid">
               {/** route for main div */}
               <div id="main">
+                <div className={classNames('fade-out', 'loading', { 'hidden': !service.serviceRequestLoading })}>
+                  <em>Loading information...</em>
+                </div>
                 <div>
                   <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
@@ -134,11 +136,12 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { authentication, alert } = state;
+  const { authentication, alert, service } = state;
   const { loggedIn } = authentication;
   return {
     loggedIn,
-    alert
+    alert,
+    service
   };
 }
 

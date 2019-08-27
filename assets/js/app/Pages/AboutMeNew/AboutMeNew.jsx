@@ -23,25 +23,17 @@ class AboutMeNew extends Component {
   render() {
 
     const { about } = this.props;
-      console.log(about);
       return (
       <main id="AboutMe">
           {(about.content != null) &&
         <Helmet title={about.content.heading} />
         }
 
-          <div
-              className={classNames('fade-out', {
-                  'hidden': about.content != null
+        <div
+          className={classNames('fade-in', {
+            'visible': about.content != null
               })}
-          >
-              <em>Loading information...</em>
-          </div>
-          <div
-              className={classNames('fade-in', {
-                  'visible': about.content != null
-              })}
-          >
+        >
 
               {(about.content != null) &&
         <article id="about">

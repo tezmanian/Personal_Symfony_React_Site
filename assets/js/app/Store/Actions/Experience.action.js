@@ -1,6 +1,6 @@
 import { experienceConstants } from "../Constants";
 import { experienceService } from "../Services";
-import { history } from "../../Helpers";
+import { serviceActions, alertActions } from "./index";
 
 export const experienceActions = {
   getJobExperienceList,
@@ -9,13 +9,22 @@ export const experienceActions = {
 
 function getJobExperienceList() {
   return dispatch => {
+    dispatch(serviceActions.serviceRequestLoading());
     dispatch(request());
 
     experienceService
       .getJobExperienceList()
       .then(
-        experiences => dispatch(success(experiences)),
-        error => dispatch(failure(error))
+        experiences => {
+          dispatch(success(experiences));
+          dispatch(serviceActions.serviceRequestNotLoading());
+        },
+        error => {
+          dispatch(failure(error));
+          dispatch(serviceActions.serviceRequestNotLoading());
+          dispatch(alertActions.error(error));
+        }
+                
       );
   };
 

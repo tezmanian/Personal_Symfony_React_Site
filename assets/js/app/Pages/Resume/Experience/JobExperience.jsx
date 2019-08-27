@@ -4,6 +4,7 @@ import Moment from "react-moment";
 import "moment-timezone";
 import "moment/locale/de";
 import "./JobExperience.scss";
+import classNames from 'classnames';
 
 import { connect } from "react-redux";
 import { experienceActions } from "../../../Store/Actions";
@@ -24,16 +25,11 @@ class JobExperience extends React.Component {
       
     return (
       <div id="JobExperiences" className="jobExperiences">
-            <div
-              className={`fade-out ${ !(experiences.items.length < 1) &&
-                "hidden"}`}
-            >
-              <em>Loading information...</em>
-            </div>
-            <div
-              className={`fade-in ${!(experiences.items.length < 1) &&
-                "visible"}`}
-        >
+        <div
+            className={classNames('fade-in', {
+              'visible': !(experiences.items.length < 1)
+              })}
+          >
         {experiences.items &&
           experiences.items.map(function(experience, i) {
             return (
