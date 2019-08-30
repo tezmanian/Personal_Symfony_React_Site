@@ -58,13 +58,15 @@
   padding-top: 2.5em;
 
   #main {
+    order: 2;
     position: relative;
     flex-grow: 1;
     width: 100%;
-    margin-left: 25em;
+/*    margin-left: 25em;*/
     min-width: 22em;
     > div {
       padding: 1em 3em;
+      padding-bottom: 2em;
     }
     
     .loading {
@@ -79,7 +81,8 @@
     margin-right: 3em;
     min-width: 22em;
     width: 22em;
-    position: absolute;
+    position: relative;
+    order: 1;
   }
 }
 

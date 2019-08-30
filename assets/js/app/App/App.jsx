@@ -6,7 +6,7 @@ import Helmet from "react-helmet";
 import { history } from "../Helpers";
 import { alertActions, userActions } from "../Store/Actions";
 import { PrivateRoute, Navbar, Sidebar, Alert } from "../Components";
-import { HomePage, LoginPage, Resume, AboutMe, AboutMeNew } from "../Pages";
+import { HomePage, LoginPage, Resume, AboutMe, AboutMeNew, Imprint } from "../Pages";
 
 import "./App.scss";
 
@@ -47,6 +47,13 @@ class App extends React.Component {
         main: () => <Resume />,
         private: true,
         label: "Lebenslauf"
+      },
+      {
+        path: "/imprint",
+        exact: true,
+        sidebar: () => <Sidebar />,
+        //main: "Resume/index",
+        main: () => <Imprint />
       }
     ];
   }
@@ -73,12 +80,11 @@ class App extends React.Component {
             <title>René Halberstadt</title>
             <meta name="description" content="Helmet application" />
           </Helmet>
-          { alert &&
-          <Alert />
-          }
           <Router history={history}>
             <Navbar menuEntry={this.routes} />
-
+            { alert &&
+              <Alert />
+            }
             <div id="flex-grid">
               {/** route for main div */}
               <div id="main">
@@ -129,6 +135,9 @@ class App extends React.Component {
               </aside>
             </div>
           </Router>
+          <footer>
+    
+          </footer>
         </div>
       </div>
     );

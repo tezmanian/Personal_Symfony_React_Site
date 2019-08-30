@@ -46,6 +46,11 @@ class Sidebar extends React.Component {
             ))}
           </ul>
         </section>
+        <section id="sidebar-impressum" className="responsive">
+          <Link className="flex-row" to="/imprint">
+          Impressum
+          </Link>
+        </section>
       </div>
     );
   }

@@ -26,11 +26,21 @@
     display: inline-block;
     padding: 0 1em 0 0;
   }
+  
+  ul.icons li:last-child {
+        display: inline-block;
+    padding: 0 1em 0 0;
+  }
 
   #sidebar-content-1 {
     p {
       font-size: 0.8em;
     }
+  }
+  
+  #sidebar-impressum {
+    border-top: none;
+    font-size: 0.7em;
   }
 
   .aboutMe {

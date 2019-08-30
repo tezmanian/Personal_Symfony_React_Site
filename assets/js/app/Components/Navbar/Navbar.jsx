@@ -62,7 +62,7 @@ class Navbar extends React.Component {
             {this.props.menuEntry
               .filter(l => l.path !== "/")
               .map(l =>
-                (l.private && this.props.loggedIn) || l.private !== true ? (
+                ((l.private && this.props.loggedIn) || l.private !== true) && l.label ? (
                 <li key={l.label} className="menu">
                     <Link key={l.label} to={l.path} onClick={this.menuHidden.bind(this)}>
                     {l.label}
